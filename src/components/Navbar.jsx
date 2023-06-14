@@ -1,0 +1,75 @@
+import React from 'react';
+import PictureImg from '../pictures/Picture.jpeg';
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
+
+function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+  const user = true;
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
+
+  return (
+    <div className='w-full flex justify-between text-center pt-2 pb-2 pl-2 pr-2 sm:flex-row md'>
+
+      <div className='font-bold text-gray-400 ml-1 pt-2 sm:ml-7 mb-4 sm:hidden sm:mb-0 '>
+        <a href='#home'>Blog.</a>
+      </div>
+      <div className='color-green-500 gap-2 hidden md:flex sm:inline sm:pt-2'>
+        <i className='fa-brands fa-facebook mr-2'><a href="www.facebook.com"></a></i>
+        <i className='fa-brands fa-square-twitter mr-2'></i>
+        <i className='fa-brands fa-square-pinterest mr-2'></i>
+        <i className='fa-brands fa-square-instagram'></i>
+      </div>
+
+      {/* <div className='text-gray-500 mb-4 md:ml-6 mr-0 pl-2 pt-2 hidden md:block md:text-gray-600  sm:ml-4 sm:pr-2 sm:mb-0 sm:pt-2 sm:text-gray-600 text-center justify-center'> */}
+      <div className={`text-gray-500 mb-4 md:ml-6 mr-0 pl-2 pt-2 bg-gray-600 md:block md:bg-white md:text-gray-600 sm:ml-4 sm:pr-2 sm:mb-0 sm:pt-2 sm:text-gray-600 text-center ${isOpen ? 'block' : 'hidden'} ${isOpen ? 'mt-10 float-left' : ''} ${isOpen ? 'float-left' : ''} `}>
+        <ul className={`flex flex-col md:flex-row uppercase md:ml-16 lg:ml-10 ${isOpen ? 'mt-0' : ''}`}>
+          <li>
+            <Link to="/" className='mr-7'>home</Link>
+          </li>
+
+          <li>
+            <Link to='/settings' className='mr-7'>about</Link>
+          </li>
+
+          <li>
+            <Link to='#contact' className='mr-7'>contact</Link>
+          </li>
+
+          <li>
+            <Link to='/write' className='mr-7'>write</Link>
+          </li>
+
+          <li>
+            {/* <Link to='/logout' className='mr-7'>logout</Link> */}
+            {user && 'LOGOUT'}
+          </li>
+        </ul>
+      </div>
+
+      <div className='h-1 items-center md:ml-24 ml-56'>
+        {user ? (
+          <img className='w-10 h-10 object-cover rounded-full' src={PictureImg} alt='' />
+        ) : (
+          <>
+            <Link to="/login" className='mr-7'>LOGIN</Link>
+            <Link to="/register" className='mr-7 '>REGISTER</Link>
+          </>
+
+        )}
+
+      </div>
+
+      <div className='sm:hidden justify-center text-center items-center mt-2' onClick={toggleMenu}>
+      <i class="fa-solid fa-bars"></i>
+      </div>
+
+    </div>
+  );
+}
+
+export default Navbar;
